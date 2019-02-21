@@ -1,15 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "ex2.h"
-
+#include<time.h>
+//#include "ex2.h"
 struct node {
-int element;
-struct node * next;
+	int element;
+	struct node * next;
 };
-
-/*structure of a linked list / head. It stores the count of number of elements 
-in the list and also a pointer link to the first node of the list. */
-
 struct linkedList {
 int count;
 struct node * first;
@@ -17,7 +13,7 @@ struct node * first;
 void insertFirst(struct linkedList* head, int ele){
 //create a node
 
-struct node *link = (struct node*) myalloc(sizeof(struct node));
+struct node *link = (struct node*) malloc(sizeof(struct node));
 /*by this you are creating a node whose address is being stored in the link pointer.*/
 
 link->next=head->first;
@@ -26,63 +22,46 @@ head->first=link;
 
 head->count=head->count+1;
 }
-//display the list
-void printList(struct linkedList * head){
-
-struct node *temp= (struct node*) myalloc(sizeof(struct node));
-temp=head->first;
-
-while(temp!=NULL)
-	{printf("%d\n",temp->element);
-	temp=temp->next;
+struct linkedList * createList(int N)
+{
+struct linkedList *ls=(struct linkedList *)malloc(sizeof(struct linkedList));
+FILE * fptr=fopen("newFile","w+");
+for(int i=0;i<N;i++)
+	{int temp=rand()%100;
+	insertFirst(ls,temp);
+	fprintf(fptr,"%d\n",temp);
 	}
+fclose(fptr);
+return ls;
 }
-
-int search(struct linkedList * head, int ele)
-{struct node *temp= (struct node*) myalloc(sizeof(struct node));
-temp=head->first;
+struct linkedList * createCycle(struct linkedList *ls)
+{struct node *firstNode= (struct node*) malloc(sizeof(struct node));
+firstNode=ls->first;
+srand(time(0));
+int choice=rand()%2;
+printf("%d\n",choice);
 int f=0;
-while(temp!=NULL)
-	{if(ele==temp->element)
+if(choice == 1)
+	{int t=rand()%100;
+	while((firstNode->next)->next!=NULL)
+		{firstNode=firstNode->next;}
+	struct node *temp= (struct node*) malloc(sizeof(struct node));
+	while(temp!=NULL)
+	{if(t==temp->element)
 		{f=1; break;}
 	temp=temp->next;
 	}
-if(f==1){
-return 1;}
-return 0;
-}
-
-void createCycle( struct linkedList* list)
-{srand(time(0));
-int num=rand()%2;
-int ele=rand();
-if(num==1)
-{struct node *temp= (struct node*) myalloc(sizeof(struct node));
-temp=list->first;
-int f=0;
-while(temp!=NULL)
-	{if(ele==temp->element)
-		{f=1; break;}
-	temp=temp->next;
+	if(f==0)
+		{return ls;}
+	else if(f==1)
+	{firstNode->next=temp;
+	return ls;
 	}
-if(f==1){
-struct node *temp2= (struct node*) myalloc(sizeof(struct node));
-temp2=list->first;
-while(temp2!=NULL)
-	{if(temp2->next==NULL)
-		{temp2->next=temp;break;}
-		}
-}}
-
+	}
+return ls;
 }
-
 int main()
-{srand(time(0));
-struct linkedList *list=(struct linkedList *)myalloc(sizeof(struct linkedList));
-for( int i=0;i<1000000;i++)
-{insertFirst(list,rand());
-}
-printList(list);
-createCycle(list);
-
+{
+struct linkedList *list=createList(20);
+list=createCycle(list);
 }
