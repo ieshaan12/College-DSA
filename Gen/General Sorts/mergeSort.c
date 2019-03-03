@@ -1,13 +1,8 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
+#include"mergeSort.h"
 
-void printArr(int arr[], int size)
-{for(int i=0;i<size;i++)
-	{printf("%d,",arr[i]);
-	}
-	printf("\n");
-}
 void merge(int arr[], int l, int m, int r) 
 {
 int i, j, k; 
@@ -25,7 +20,7 @@ int i, j, k;
     i = 0; // Initial index of first subarray 
     j = 0; // Initial index of second subarray 
     k = l; // Initial index of merged subarray 
-    printf("%d L %d M %d H\n",l,m,r);
+    //printf("%d L %d M %d H\n",l,m,r);
     while (i < n1 && j < n2) 
     { 
         if (L[i] <= R[j]) 
@@ -72,17 +67,4 @@ void mergeSort(int arr[], int l, int r)
         merge(arr, l, m, r); 
     } 
 } 
-int main()
-{int size=10;
-int arr[size];
-srand(time(0));
-for(int i=0;i<size;i++)
-	{arr[i]=rand()%100;
-	}
-	printArr(arr,size);
-mergeSort(arr,0,size-1);
-printf("Post-MergeSort\n");
-	printArr(arr,size);
-	
-	return 0;
-}
+
