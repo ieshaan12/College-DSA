@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#include"insertionSort.h"
+#include"Sort.h"
 void InsertionSort(int arr[],int size)
 {
 	for(int i=1;i<size;i++)

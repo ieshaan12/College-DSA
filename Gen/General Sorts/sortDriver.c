@@ -1,10 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#include"quickSort.h"
-#include"insertionSort.h"
-#include"mergeSort.h"
-#include"bubbleSort.h"
+#include"Sort.h"
 void printArr(int arr[], int size)
 {for(int i=0;i<size;i++)
 	printf("%d,",arr[i]);
@@ -60,6 +57,16 @@ int main()
 	end=clock();
 	time_taken=(float)(end-start)/CLOCKS_PER_SEC;
 	printf("Post-bubbleSort:%lf s\n",time_taken);
+	//printArr(arr2,size);
+	printf("\n");
+
+	for(int i=0;i<size;i++)
+		arr2[i]=arr[i];
+	start=clock();
+	selection(arr2,size);
+	end=clock();
+	time_taken=(float)(end-start)/CLOCKS_PER_SEC;
+	printf("Post-selectionSort:%lf s\n",time_taken);
 	//printArr(arr2,size);
 	printf("\n");
 	

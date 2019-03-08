@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#include"quickSort.h"
+#include"Sort.h"
 int partition(int arr[], int low,int high)
 {
 int i=low-1;
